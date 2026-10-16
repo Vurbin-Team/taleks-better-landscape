@@ -8,9 +8,7 @@
   "license": "MIT",
   "environment": "*",
   "entrypoints": {
-    "main": [
-      "taleksbetterlandscape.mc.FantasyTerrainMod"
-    ]
+    "main": []
   },
   "mixins": ["taleks-better-landscape.mixins.json"],
   "depends": {
