@@ -10,7 +10,7 @@
   "license": "MIT",
   "environment": "*",
   "entrypoints": {
-    "main": []
+    "main": ["taleksbetterlandscape.TalekSBetterLandscape"]
   },
   "mixins": [
     "taleks-better-landscape.mixins.json"

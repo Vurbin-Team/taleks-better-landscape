@@ -1,0 +1,13 @@
+{
+  "type": "lithostitched:wrap_density_function",
+  "target_function": "minecraft:overworld/base_3d_noise",
+  "wrapper_function": {
+    "type": "minecraft:mul",
+    "argument1": { "type": "lithostitched:wrapped_marker" },
+    "argument2": {
+      "type": "minecraft:add",
+      "argument1": 1,
+      "argument2": { "type": "minecraft:mul", "argument1": -0.8, "argument2": "taleks-better-landscape:river_mask" }
+    }
+  }
+}

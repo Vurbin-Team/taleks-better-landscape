@@ -1,0 +1,44 @@
+{
+  "type": "lithostitched:wrap_density_function",
+  "target_function": "minecraft:overworld/ridges",
+  "wrapper_function": {
+    "type": "minecraft:flat_cache",
+    "argument": {
+      "type": "minecraft:add",
+      "argument1": {
+        "type": "minecraft:mul",
+        "argument1": {
+          "type": "minecraft:flat_cache",
+          "argument": {
+            "type": "minecraft:clamp",
+            "input": {
+              "type": "minecraft:mul",
+              "argument1": 1.2,
+              "argument2": {
+                "type": "lithostitched:fast_noise",
+                "config": "taleks-better-landscape:ridges",
+                "y_scale": 0
+              }
+            },
+            "min": -1,
+            "max": 1
+          }
+        },
+        "argument2": {
+          "type": "minecraft:add",
+          "argument1": 1,
+          "argument2": {
+            "type": "minecraft:mul",
+            "argument1": -1,
+            "argument2": "taleks-better-landscape:beach_mask"
+          }
+        }
+      },
+      "argument2": {
+        "type": "minecraft:mul",
+        "argument1": 0.4,
+        "argument2": "taleks-better-landscape:beach_mask"
+      }
+    }
+  }
+}

@@ -2,7 +2,13 @@ package taleksbetterlandscape;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
+import net.fabricmc.fabric.api.biome.v1.ModificationPhase;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.biome.Biomes;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +20,14 @@ public class TalekSBetterLandscape implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		LOGGER.info("Hello Fabric world!");
+		// no cave/canyon carvers on beaches
+		BiomeModifications.create(id("no_beach_carvers")).add(ModificationPhase.REMOVALS,
+			BiomeSelectors.includeByKey(Biomes.BEACH, Biomes.SNOWY_BEACH),
+			ctx -> {
+				for (String n : new String[] {"cave", "cave_extra_underground", "canyon"}) {
+					ctx.getGenerationSettings().removeCarver(ResourceKey.create(Registries.CONFIGURED_CARVER, Identifier.withDefaultNamespace(n)));
+				}
+			});
 	}
 
 	public static Identifier id(String path) {

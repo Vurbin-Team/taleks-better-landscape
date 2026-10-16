@@ -1,0 +1,6 @@
+{
+  "type": "lithostitched:remove_features",
+  "biomes": ["minecraft:beach", "minecraft:snowy_beach"],
+  "features": ["minecraft:lake_lava_surface", "minecraft:lake_lava_underground"],
+  "step": "lakes"
+}
