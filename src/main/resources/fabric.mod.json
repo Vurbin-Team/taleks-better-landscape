@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "fantasy_terrain",
+  "version": "${version}",
+  "name": "Fantasy Terrain",
+  "description": "Fairy-tale terrain: coastal sea stacks and more. Changes terrain shape only.",
+  "authors": [],
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "taleksbetterlandscape.mc.FantasyTerrainMod"
+    ]
+  },
+  "mixins": ["fantasy_terrain.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.18.4",
+    "minecraft": "~26.1",
+    "java": ">=25"
+  }
+}

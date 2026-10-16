@@ -1,0 +1,14 @@
+{
+	"required": true,
+	"package": "taleksbetterlandscape.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"mixins": [
+		"NoiseGeneratorSettingsMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}
