@@ -1,0 +1,20 @@
+{
+  "type": "lithostitched:wrap_density_function",
+  "target_function": "minecraft:overworld/offset",
+  "wrapper_function": {
+    "type": "minecraft:add",
+    "argument1": { "type": "lithostitched:wrapped_marker" },
+    "argument2": {
+      "type": "minecraft:flat_cache",
+      "argument": {
+        "type": "minecraft:mul",
+        "argument1": 0.3,
+        "argument2": {
+          "type": "minecraft:mul",
+          "argument1": "taleks-better-landscape:mountain_mask",
+          "argument2": { "type": "lithostitched:fast_noise", "config": "taleks-better-landscape:mountains", "y_scale": 0 }
+        }
+      }
+    }
+  }
+}

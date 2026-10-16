@@ -2,8 +2,8 @@
   "type": "lithostitched:wrap_density_function",
   "target_function": "minecraft:overworld/caves/entrances",
   "wrapper_function": {
-    "type": "minecraft:max",
+    "type": "minecraft:add",
     "argument1": { "type": "lithostitched:wrapped_marker" },
-    "argument2": { "type": "minecraft:mul", "argument1": 2, "argument2": "taleks-better-landscape:beach_mask" }
+    "argument2": 20
   }
 }

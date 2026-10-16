@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:mul",
+  "argument1": {
+    "type": "minecraft:clamp",
+    "input": {
+      "type": "minecraft:mul",
+      "argument1": 2,
+      "argument2": {
+        "type": "minecraft:add",
+        "argument1": -0.2,
+        "argument2": { "type": "minecraft:mul", "argument1": -1, "argument2": "minecraft:overworld/erosion" }
+      }
+    },
+    "min": 0,
+    "max": 1
+  },
+  "argument2": {
+    "type": "minecraft:clamp",
+    "input": {
+      "type": "minecraft:mul",
+      "argument1": 5,
+      "argument2": { "type": "minecraft:add", "argument1": 0.1, "argument2": "minecraft:overworld/continents" }
+    },
+    "min": 0,
+    "max": 1
+  }
+}
