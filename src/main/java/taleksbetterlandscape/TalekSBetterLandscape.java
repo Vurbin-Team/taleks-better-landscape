@@ -5,6 +5,8 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.biome.v1.ModificationPhase;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -20,6 +22,9 @@ public class TalekSBetterLandscape implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		Registry.register(BuiltInRegistries.FEATURE, id("shore_shelf"), new ShoreShelfFeature());
+		Registry.register(BuiltInRegistries.FEATURE, id("rocky_cove"), new RockyCoveFeature());
+
 		// no cave/canyon carvers on beaches
 		BiomeModifications.create(id("no_beach_carvers")).add(ModificationPhase.REMOVALS,
 			BiomeSelectors.includeByKey(Biomes.BEACH, Biomes.SNOWY_BEACH),
