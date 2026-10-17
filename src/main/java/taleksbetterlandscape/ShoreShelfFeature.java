@@ -16,13 +16,15 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 /**
  * Sand shelf around ocean shores: 3 steps, each 3 blocks wide (horizontal distance to the nearest
  * non-water column), each 1 block lower: tops at y=62, 61, 60. One sand layer on 3 packed_mud layers.
+ *
+ * Where the sea floor is deeper than the ideal shelf the pedestal is limited to a few blocks above the
+ * floor and thins out towards the outer edge (see {@link ShelfMath}), so it follows the relief instead of
+ * standing on it as a tall flat-sided column.
  */
 public class ShoreShelfFeature extends Feature<NoneFeatureConfiguration> {
 	static final TagKey<Biome> OCEAN = TagKey.create(Registries.BIOME, Identifier.withDefaultNamespace("is_ocean"));
-	private static final int SEA = 63;
-	private static final int STEP = 3;
-	private static final int STEPS = 3;
-	private static final int R = STEP * STEPS;
+	private static final int SEA = ShelfMath.SEA;
+	private static final int R = ShelfMath.R;
 	private static final int W = 16 + 2 * R;
 
 	public ShoreShelfFeature() {
@@ -74,8 +76,7 @@ public class ShoreShelfFeature extends Feature<NoneFeatureConfiguration> {
 				}
 				if (best > R * R) continue;
 
-				int k = Math.min(STEPS, (int) Math.ceil(Math.sqrt(best) / STEP));
-				int top = Math.max(floor[i][j], SEA - k);
+				int top = ShelfMath.top(floor[i][j], best);
 				for (int y = Math.min(floor[i][j] + 1, top - 3); y < top; y++) {
 					level.setBlock(p.set(x, y, z), (y >= top - 3 ? Blocks.PACKED_MUD : Blocks.STONE).defaultBlockState(), 2);
 				}

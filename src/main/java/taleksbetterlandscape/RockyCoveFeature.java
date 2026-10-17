@@ -1,8 +1,11 @@
 package taleksbetterlandscape;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
@@ -12,9 +15,12 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 /**
- * Rocky cove: a bay is bitten into the coast and opens towards the sea. Around the water there is a sand
- * beach, then a cliff face of granite and packed mud that rises smoothly to the surrounding terrain and
- * fades into it without a seam. Everything on the cove floor is replaced with sand.
+ * Rocky cove: a bay is bitten into the coast and opens towards the sea. The bay floor and the beach are one flat
+ * sand plane one block below sea level, ending at the original shoreline; behind it there is a cliff face of
+ * granite and packed mud that rises smoothly to the surrounding terrain and fades into it without a seam.
+ * The bay outline is random: round, a rounded rectangle, or an irregular blob, from the original size up to a
+ * 48x48 block footprint (the 3x3 chunk write window).
+ * Not placed next to frozen oceans. Run with -Dtaleks.coveDebug=true to log why a chunk got no cove.
  *
  * The geometry (where, which way, how big, the new height of every column) lives in {@link CoveMath};
  * this class only reads the terrain, asks the biome source and writes blocks.
@@ -26,6 +32,7 @@ public class RockyCoveFeature extends Feature<NoneFeatureConfiguration> {
 	private static final int W = CoveMath.W;
 	private static final int CLEAR_ABOVE = 28; // how far above the surface plants / trees are wiped
 	private static final int MAX_Y = 300;
+	private static final boolean DEBUG = Boolean.getBoolean("taleks.coveDebug");
 
 	public RockyCoveFeature() {
 		super(NoneFeatureConfiguration.CODEC);
@@ -41,7 +48,11 @@ public class RockyCoveFeature extends Feature<NoneFeatureConfiguration> {
 		int wz = oz - PAD;
 
 		// cheap early exit: the feature is registered in all overworld biomes, so skip chunks far from any ocean
-		if (!oceanNearby(level, ox + 8, oz + 8)) return false;
+		if (!oceanNearby(level, ox + 8, oz + 8)) {
+			if (DEBUG) TalekSBetterLandscape.LOGGER.info("rocky_cove chunk {},{}: no ocean biome within 96 blocks", ox >> 4, oz >> 4);
+			return false;
+		}
+		if (isFrozenOcean(biomeAt(level, ox + 8, oz + 8))) return false;
 
 		// snapshot of the terrain (edits below must not change what we measure)
 		int[][] top = new int[W][W];
@@ -64,14 +75,27 @@ public class RockyCoveFeature extends Feature<NoneFeatureConfiguration> {
 
 		boolean[][] sea = CoveMath.seaMask(water, known, 300);
 		int[][] edge = CoveMath.distToUnknown(known);
+		int[] why = new int[CoveMath.WHY_N];
 		CoveMath.Site site = CoveMath.findSite(wx, wz, PAD, PAD, water, known, sea, top, edge,
-			bound -> rnd.nextInt(bound), (x, z, ax, az) -> oceanAhead(level, x, z, ax, az));
-		if (site == null) return false;
+			bound -> rnd.nextInt(bound), (x, z, ax, az) -> oceanAhead(level, x, z, ax, az), why);
+		if (site == null) {
+			if (DEBUG) {
+				TalekSBetterLandscape.LOGGER.info(
+					"rocky_cove chunk {},{}: rejected (no shore column {}, irregular shore {}, strait/river {}, does not fit {}, islet {}, no ocean/frozen ocean ahead {})",
+					ox >> 4, oz >> 4, why[CoveMath.WHY_NO_SHORE], why[CoveMath.WHY_NORMAL], why[CoveMath.WHY_STRAIT],
+					why[CoveMath.WHY_FIT], why[CoveMath.WHY_ISLET], why[CoveMath.WHY_OCEAN]);
+			}
+			return false;
+		}
 
 		long ns = rnd.nextLong();
 		double hc = 6 + rnd.nextInt(5);
-		CoveMath.Plan plan = CoveMath.plan(ns, wx, wz, top, water, known, edge, site.cx, site.cz, site.ax, site.az, site.rb, hc);
+		CoveMath.Plan plan = CoveMath.plan(ns, wx, wz, top, water, known, edge, site, hc);
 		apply(level, ns, wx, wz, top, known, plan);
+		if (DEBUG) {
+			TalekSBetterLandscape.LOGGER.info("rocky_cove chunk {},{}: placed shape {} size {} at {},{}",
+				ox >> 4, oz >> 4, site.shape.type, site.k, wx + (int) site.cx, wz + (int) site.cz);
+		}
 		return true;
 	}
 
@@ -160,14 +184,26 @@ public class RockyCoveFeature extends Feature<NoneFeatureConfiguration> {
 	 * Biome lookup that works outside the generation region: WorldGenRegion.getBiome throws
 	 * "Requested chunk unavailable" for chunks it does not hold, the uncached lookup asks the biome source directly.
 	 */
-	private static boolean isOceanAt(WorldGenLevel level, int x, int z) {
-		return level.getUncachedNoiseBiome(x >> 2, (SEA - 1) >> 2, z >> 2).is(ShoreShelfFeature.OCEAN);
+	private static Holder<Biome> biomeAt(WorldGenLevel level, int x, int z) {
+		return level.getUncachedNoiseBiome(x >> 2, (SEA - 1) >> 2, z >> 2);
 	}
 
-	/** Is there an ocean biome seaward along the ray (the biome border lies offshore of the real coastline)? */
+	private static boolean isOceanAt(WorldGenLevel level, int x, int z) {
+		return biomeAt(level, x, z).is(ShoreShelfFeature.OCEAN);
+	}
+
+	private static boolean isFrozenOcean(Holder<Biome> biome) {
+		return biome.is(Biomes.FROZEN_OCEAN) || biome.is(Biomes.DEEP_FROZEN_OCEAN);
+	}
+
+	/**
+	 * Is the first ocean biome seaward along the ray a normal (not frozen) one? The biome border lies offshore
+	 * of the real coastline, hence the long ray.
+	 */
 	private static boolean oceanAhead(WorldGenLevel level, int x, int z, double dx, double dz) {
 		for (int s = 0; s <= 96; s += 8) {
-			if (isOceanAt(level, x + (int) Math.round(dx * s), z + (int) Math.round(dz * s))) return true;
+			Holder<Biome> b = biomeAt(level, x + (int) Math.round(dx * s), z + (int) Math.round(dz * s));
+			if (b.is(ShoreShelfFeature.OCEAN)) return !isFrozenOcean(b);
 		}
 		return false;
 	}

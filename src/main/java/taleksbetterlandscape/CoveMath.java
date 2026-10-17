@@ -10,6 +10,8 @@ import java.util.function.IntUnaryOperator;
 final class CoveMath {
 	static final int SEA = 63;
 	static final int W = 64;
+	/** Top of the flat cove sand: one block below sea level, flush with the water surface. */
+	static final int BEACH_Y = SEA - 1;
 
 	/** Column kinds of a {@link Plan}. */
 	static final byte NONE = 0;
@@ -144,29 +146,57 @@ final class CoveMath {
 
 	// ------------------------------------------------------------------ choosing where to put the cove
 
-	/** Asks the world whether there is an ocean biome seaward of a world position. */
+	/** Size range of a bay: k is the radius of a circle with the same area. The smallest is the original cove. */
+	static final double K_MIN = 7;
+	static final double K_MAX = 12;
+	/** Width of the flat sand band around the bay, of the cliff face behind it, and of the fade-out behind that. */
+	static final double BEACH_W = 4.9;
+	static final double CLIFF_W = 4.2;
+	static final double BLEND_W = 6.3;
+	/** Safety margin for the boundary noise. */
+	static final double MARGIN = 3;
+
+	/** Reasons findSite rejected a candidate, for debugging ({@code -Dtaleks.coveDebug=true}). */
+	static final int WHY_NO_SHORE = 0;
+	static final int WHY_NORMAL = 1;
+	static final int WHY_STRAIT = 2;
+	static final int WHY_FIT = 3;
+	static final int WHY_ISLET = 4;
+	static final int WHY_OCEAN = 5;
+	static final int WHY_N = 6;
+
+	/** Asks the world whether there is a (non-frozen) ocean biome seaward of a world position. */
 	interface OceanProbe {
 		boolean oceanAhead(int worldX, int worldZ, double ax, double az);
 	}
 
-	/** Where the cove goes: bay centre (window coordinates), direction to the sea and bay radius. */
+	/** Where the cove goes: bay centre (window coordinates), direction to the sea, shape and size. */
 	static final class Site {
 		double cx;
 		double cz;
 		double ax;
 		double az;
-		double rb;
+		CoveShape shape;
+		double k;
+	}
+
+	/** Total reach of the cut (bay + beach + cliff face) from the bay centre. */
+	static double cutReach(double bound) {
+		return bound + BEACH_W + CLIFF_W + MARGIN;
 	}
 
 	/**
 	 * Picks a shore column near the middle of the origin chunk where a cove fits: real sea in front (not a
 	 * pond), a real landmass behind (not an islet), a regular shore, and enough known terrain around it.
+	 * A random shape and target size are drawn; the cove is shrunk (down to K_MIN) or its centre is moved
+	 * towards the middle of the 3x3 chunk window until the whole cut fits inside it (at most 48x48 blocks).
 	 *
 	 * @param chunkI,chunkJ window coordinates of the origin chunk's corner
 	 * @param rnd           bound -> random int in [0, bound)
+	 * @param why           counters per rejection reason (see WHY_*), may be null
 	 */
 	static Site findSite(int wx, int wz, int chunkI, int chunkJ, boolean[][] water, boolean[][] known,
-						 boolean[][] sea, int[][] top, int[][] edge, IntUnaryOperator rnd, OceanProbe probe) {
+						 boolean[][] sea, int[][] top, int[][] edge, IntUnaryOperator rnd, OceanProbe probe, int[] why) {
 		int[] ci = new int[256];
 		int[] cj = new int[256];
 		int n = 0;
@@ -179,6 +209,10 @@ final class CoveMath {
 				}
 			}
 		}
+		if (n == 0) {
+			count(why, WHY_NO_SHORE);
+			return null;
+		}
 		for (int k = n - 1; k > 0; k--) {
 			int r = rnd.applyAsInt(k + 1);
 			int ti = ci[k];
@@ -188,29 +222,96 @@ final class CoveMath {
 			ci[r] = ti;
 			cj[r] = tj;
 		}
-		for (int k = 0; k < Math.min(n, 24); k++) {
-			int i = ci[k];
-			int j = cj[k];
+		double target = K_MIN + (K_MAX - K_MIN) * rnd.applyAsInt(1000) / 1000.0;
+		int type = CoveShape.randomType(rnd);
+		Site best = null;
+		for (int c = 0; c < Math.min(n, 24); c++) {
+			int i = ci[c];
+			int j = cj[c];
 			double[] a = seaNormal(sea, known, i, j, 16);
-			if (a == null || !seaAhead(sea, known, i, j, a[0], a[1], 16)) continue;
-			double rb = 7 + rnd.applyAsInt(4);
-			double cx = i - a[0] * 0.25 * rb;
-			double cz = j - a[1] * 0.25 * rb;
-			int ei = Math.max(0, Math.min(W - 1, (int) Math.round(cx)));
-			int ej = Math.max(0, Math.min(W - 1, (int) Math.round(cz)));
-			while (rb >= 6 && cutReach(rb) > edge[ei][ej]) rb -= 0.5;
-			if (rb < 6) continue;
-			if (!isMainland(water, known, i, j, 700)) continue;
-			if (!probe.oceanAhead(wx + i, wz + j, a[0], a[1])) continue;
+			if (a == null) {
+				count(why, WHY_NORMAL);
+				continue;
+			}
+			if (!seaAhead(sea, known, i, j, a[0], a[1], 16)) {
+				count(why, WHY_STRAIT);
+				continue;
+			}
+			CoveShape shape = CoveShape.random(type, rnd, a[0], a[1]);
+			Site site = fit(shape, i, j, a, target, sea, known, edge);
+			if (site == null) {
+				count(why, WHY_FIT);
+				continue;
+			}
+			if (best != null && site.k <= best.k) continue;
+			if (!isMainland(water, known, i, j, 700)) {
+				count(why, WHY_ISLET);
+				continue;
+			}
+			if (!probe.oceanAhead(wx + i, wz + j, a[0], a[1])) {
+				count(why, WHY_OCEAN);
+				continue;
+			}
+			best = site;
+			if (best.k >= target - 1e-6) break;
+		}
+		return best;
+	}
+
+	private static void count(int[] why, int reason) {
+		if (why != null) why[reason]++;
+	}
+
+	/**
+	 * Largest size (not above target, not below K_MIN) at which the shape, hung on shore column (i, j), has its
+	 * whole cut inside the known window. The centre is moved towards the window middle when needed, as long as the
+	 * shoreline is still where the bay expects it.
+	 */
+	private static Site fit(CoveShape shape, int i, int j, double[] a, double target, boolean[][] sea,
+							boolean[][] known, int[][] edge) {
+		for (double k = target; k >= K_MIN - 1e-9; k -= 0.5) {
+			double h = cutReach(shape.bound(k));
+			double lo = 15 + h;
+			double hi = W - h;
+			if (lo > hi) continue;
+			// the bay reaches 1.25 k inland of the shore column; the centre sits off blocks inland of it
+			double off = 1.25 * k - shape.landExtent(k);
+			double cx = i - a[0] * off;
+			double cz = j - a[1] * off;
+			double fx = Math.max(lo, Math.min(hi, cx));
+			double fz = Math.max(lo, Math.min(hi, cz));
+			if (Math.hypot(fx - cx, fz - cz) > 8) continue;
+			int ei = (int) Math.round(fx);
+			int ej = (int) Math.round(fz);
+			if (edge[ei][ej] < h) continue;
+			if (!shoreWhereExpected(sea, known, fx, fz, a[0], a[1], off)) continue;
 			Site site = new Site();
-			site.cx = cx;
-			site.cz = cz;
+			site.cx = fx;
+			site.cz = fz;
 			site.ax = a[0];
 			site.az = a[1];
-			site.rb = rb;
+			site.shape = shape;
+			site.k = k;
 			return site;
 		}
 		return null;
+	}
+
+	/** Along the sea axis from the centre, the water must start about {@code off} blocks away (+-3). */
+	private static boolean shoreWhereExpected(boolean[][] sea, boolean[][] known, double cx, double cz,
+											  double ax, double az, double off) {
+		boolean centreSea = isSea(sea, known, (int) Math.round(cx), (int) Math.round(cz));
+		for (int s = 0; s <= 40; s++) {
+			int x = (int) Math.round(cx + (centreSea ? -ax : ax) * s);
+			int z = (int) Math.round(cz + (centreSea ? -az : az) * s);
+			if (x < 0 || z < 0 || x >= W || z >= W || !known[x][z]) return false;
+			if (sea[x][z] != centreSea) return Math.abs((centreSea ? -s : s) - off) <= 3;
+		}
+		return false;
+	}
+
+	private static boolean isSea(boolean[][] sea, boolean[][] known, int i, int j) {
+		return i >= 0 && j >= 0 && i < W && j < W && known[i][j] && sea[i][j];
 	}
 
 	/** Does open sea continue straight ahead for a while? Rejects rivers and narrow straits. */
@@ -237,41 +338,27 @@ final class CoveMath {
 
 	// ------------------------------------------------------------------ the cove itself
 
-	/** Distance from the bay centre that the cut (bay + beach + cliff face) needs, in blocks. */
-	static double cutReach(double rb) {
-		return rb + beachWidth(rb) + cliffWidth(rb) + 3;
-	}
-
-	static double beachWidth(double rb) {
-		return Math.max(3, 0.7 * rb);
-	}
-
-	static double cliffWidth(double rb) {
-		return Math.max(3.5, 0.6 * rb);
-	}
-
 	/**
-	 * Plans the new surface. Layout around the bay centre, in order of growing radius q:
+	 * Plans the new surface. Layout around the bay, by signed distance sd from its outline:
 	 * <ol>
-	 *   <li>q &lt; rb: water-filled bay with a sandy floor, 3-block steps down towards the middle;</li>
-	 *   <li>beach band: flat sand at y=63/64, only on columns that were land;</li>
+	 *   <li>sd &lt; beach width: one flat sand plane at BEACH_Y (bay + beach), only on columns that were land;</li>
 	 *   <li>cliff face: smooth S-curve from the beach up to the terrain (plus a lift on the inland side);</li>
 	 *   <li>blend: the lift fades out to the original terrain, so there is no seam.</li>
 	 * </ol>
-	 * Sea-side columns that were water are never touched (except the bay floor).
+	 * Columns that were water are never touched, so the sand ends at the original shoreline.
 	 *
-	 * @param cx,cz bay centre in window coordinates
-	 * @param ax,az unit vector pointing towards the sea
-	 * @param rb    bay radius
-	 * @param hc    extra cliff height above the beach where the terrain is low
+	 * @param site bay centre (window coordinates), sea direction, shape and size
+	 * @param hc   extra cliff height above the beach where the terrain is low
 	 */
 	static Plan plan(long ns, int wx, int wz, int[][] top, boolean[][] water, boolean[][] known, int[][] edge,
-					 double cx, double cz, double ax, double az, double rb, double hc) {
+					 Site site, double hc) {
 		Plan pl = new Plan();
-		double bw = beachWidth(rb);
-		double wc = cliffWidth(rb);
-		double wbl = Math.max(5, 0.9 * rb);
-		double reach = rb + bw + wc + wbl + 3;
+		CoveShape shape = site.shape;
+		double cx = site.cx;
+		double cz = site.cz;
+		double ax = site.ax;
+		double az = site.az;
+		double reach = shape.bound(site.k) + BEACH_W + CLIFF_W + BLEND_W + MARGIN;
 		int i0 = Math.max(0, (int) Math.floor(cx - reach));
 		int i1 = Math.min(W - 1, (int) Math.ceil(cx + reach));
 		int j0 = Math.max(0, (int) Math.floor(cz - reach));
@@ -286,7 +373,7 @@ final class CoveMath {
 				if (d >= reach) continue;
 				int x = wx + i;
 				int z = wz + j;
-				double q = d + 1.6 * noise(ns, x * 0.1, 0, z * 0.1);
+				double sd = shape.sdf(dx, dz, site.k) + shape.noiseAmp * noise(ns, x * 0.1, 0, z * 0.1);
 				double u = dx * ax + dz * az; // > 0 towards the sea
 				double inl = d < 1e-6 ? 1 : -u / d; // +1 straight inland, -1 straight to the sea
 				double cw = smoothstep(-0.5, 0.35, inl);
@@ -294,28 +381,25 @@ final class CoveMath {
 				boolean wat = water[i][j];
 				double fade = Math.min(1, edge[i][j] / 6.0);
 				double hcv = hc * (0.8 + 0.2 * noise(ns + 3, x * 0.07, 5, z * 0.07));
-				double lift = cw * fade * Math.max(0, SEA + 1 + hcv - t0);
+				double lift = cw * fade * Math.max(0, BEACH_Y + 1 + hcv - t0);
 
 				int s;
 				byte k;
-				if (q < rb) {
-					int yf = Math.max(SEA - 5, SEA - 1 - (int) ((rb - q) / 3.0));
-					if (wat && t0 >= yf) continue;
-					s = yf;
-					k = SAND;
-				} else if (q < rb + bw) {
+				if (sd < BEACH_W) {
+					// bay + beach: one flat sand plane, only on columns that were land
+					// (water columns are never touched, so the plane ends exactly at the original shoreline)
 					if (wat) continue;
-					s = q < rb + 1.5 ? SEA : SEA + 1;
+					s = BEACH_Y;
 					k = SAND;
-				} else if (q < rb + bw + wc) {
+				} else if (sd < BEACH_W + CLIFF_W) {
 					if (wat) continue;
-					double f = smoothstep(0, 1, (q - rb - bw) / wc);
-					double base = SEA + 1;
+					double f = smoothstep(0, 1, (sd - BEACH_W) / CLIFF_W);
+					double base = BEACH_Y + 1;
 					s = (int) Math.round(base + (t0 + lift - base) * f);
 					k = TERRAIN;
 				} else {
 					if (wat) continue;
-					double f = smoothstep(0, 1, (q - rb - bw - wc) / wbl);
+					double f = smoothstep(0, 1, (sd - BEACH_W - CLIFF_W) / BLEND_W);
 					s = t0 + (int) Math.round(lift * (1 - f));
 					k = TERRAIN;
 				}
