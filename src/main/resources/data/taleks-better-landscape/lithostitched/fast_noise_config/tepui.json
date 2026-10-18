@@ -1,0 +1,9 @@
+{
+  "type": "lithostitched:simplex",
+  "frequency": 0.0032,
+  "salt": 603,
+  "fractal_type": "fbm",
+  "octaves": 3,
+  "lacunarity": 2.0,
+  "gain": 0.5
+}

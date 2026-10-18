@@ -1,0 +1,55 @@
+{
+  "type": "minecraft:flat_cache",
+  "argument": {
+    "type": "minecraft:mul",
+    "argument1": {
+      "type": "minecraft:mul",
+      "argument1": {
+        "type": "minecraft:clamp",
+        "input": {
+          "type": "minecraft:mul",
+          "argument1": 6.250000000000001,
+          "argument2": {
+            "type": "minecraft:add",
+            "argument1": "taleks-better-landscape:fantasy_zone",
+            "argument2": -0.42
+          }
+        },
+        "min": 0,
+        "max": 1
+      },
+      "argument2": {
+        "type": "minecraft:clamp",
+        "input": {
+          "type": "minecraft:mul",
+          "argument1": 5.0,
+          "argument2": {
+            "type": "minecraft:add",
+            "argument1": "minecraft:overworld/continents",
+            "argument2": -0.0
+          }
+        },
+        "min": 0,
+        "max": 1
+      }
+    },
+    "argument2": {
+      "type": "minecraft:add",
+      "argument1": 1,
+      "argument2": {
+        "type": "minecraft:mul",
+        "argument1": -1,
+        "argument2": {
+          "type": "minecraft:clamp",
+          "input": {
+            "type": "minecraft:mul",
+            "argument1": 2,
+            "argument2": "taleks-better-landscape:mountain_mask"
+          },
+          "min": 0,
+          "max": 1
+        }
+      }
+    }
+  }
+}

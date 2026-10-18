@@ -1,0 +1,96 @@
+{
+  "type": "minecraft:flat_cache",
+  "argument": {
+    "type": "lithostitched:shift",
+    "input": {
+      "type": "minecraft:mul",
+      "argument1": {
+        "type": "minecraft:clamp",
+        "input": {
+          "type": "minecraft:mul",
+          "argument1": 10,
+          "argument2": {
+            "type": "minecraft:add",
+            "argument1": {
+              "type": "minecraft:add",
+              "argument1": 0.42,
+              "argument2": {
+                "type": "minecraft:mul",
+                "argument1": 0.08,
+                "argument2": {
+                  "type": "lithostitched:fast_noise",
+                  "config": "taleks-better-landscape:spire_value",
+                  "xz_scale": 1.0,
+                  "y_scale": 0.0
+                }
+              }
+            },
+            "argument2": {
+              "type": "minecraft:mul",
+              "argument1": -1,
+              "argument2": {
+                "type": "minecraft:add",
+                "argument1": {
+                  "type": "lithostitched:fast_noise",
+                  "config": "taleks-better-landscape:spire_distance",
+                  "xz_scale": 1.0,
+                  "y_scale": 0.0
+                },
+                "argument2": 1
+              }
+            }
+          }
+        },
+        "min": 0,
+        "max": 1
+      },
+      "argument2": {
+        "type": "lithostitched:select",
+        "input": {
+          "type": "lithostitched:fast_noise",
+          "config": "taleks-better-landscape:spire_value",
+          "xz_scale": 1.0,
+          "y_scale": 0.0
+        },
+        "fallback": 0.55,
+        "selections": [
+          {
+            "range": [
+              -1,
+              -0.39
+            ],
+            "function": 0.35
+          },
+          {
+            "range": [
+              0.43,
+              1
+            ],
+            "function": 0.8
+          }
+        ]
+      }
+    },
+    "shift_x": {
+      "type": "minecraft:mul",
+      "argument1": 16,
+      "argument2": {
+        "type": "lithostitched:fast_noise",
+        "config": "taleks-better-landscape:spire_warp_x",
+        "xz_scale": 1.0,
+        "y_scale": 0.0
+      }
+    },
+    "shift_y": 0,
+    "shift_z": {
+      "type": "minecraft:mul",
+      "argument1": 16,
+      "argument2": {
+        "type": "lithostitched:fast_noise",
+        "config": "taleks-better-landscape:spire_warp_z",
+        "xz_scale": 1.0,
+        "y_scale": 0.0
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "lithostitched:force_placement",
+  "dimension": "minecraft:overworld",
+  "priority": 901,
+  "biome": "minecraft:frozen_peaks",
+  "parameters": {
+    "taleks-better-landscape:mountain_mask": {
+      "min_inclusive": 0.62
+    },
+    "temperature": {
+      "max_inclusive": 0.2
+    },
+    "weirdness": {
+      "min_inclusive": 0.0
+    },
+    "depth": {
+      "max_inclusive": 0.18
+    }
+  }
+}

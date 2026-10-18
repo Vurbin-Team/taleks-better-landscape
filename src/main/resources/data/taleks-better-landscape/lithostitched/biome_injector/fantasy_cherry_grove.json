@@ -1,0 +1,18 @@
+{
+  "type": "lithostitched:force_placement",
+  "dimension": "minecraft:overworld",
+  "priority": 1100,
+  "biome": "minecraft:cherry_grove",
+  "parameters": {
+    "taleks-better-landscape:fantasy_mask": {
+      "min_inclusive": 0.5
+    },
+    "temperature": {
+      "min_inclusive": -0.35,
+      "max_inclusive": 0.45
+    },
+    "depth": {
+      "max_inclusive": 0.18
+    }
+  }
+}

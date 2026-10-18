@@ -1,0 +1,20 @@
+{
+  "type": "lithostitched:force_placement",
+  "dimension": "minecraft:overworld",
+  "priority": 1001,
+  "biome": "minecraft:grove",
+  "parameters": {
+    "taleks-better-landscape:mountain_mask": {
+      "min_inclusive": 0.38
+    },
+    "temperature": {
+      "max_inclusive": 0.2
+    },
+    "humidity": {
+      "min_inclusive": -0.0999
+    },
+    "depth": {
+      "max_inclusive": 0.18
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "lithostitched:force_placement",
+  "dimension": "minecraft:overworld",
+  "priority": 1004,
+  "biome": "minecraft:windswept_hills",
+  "parameters": {
+    "taleks-better-landscape:mountain_mask": {
+      "min_inclusive": 0.38
+    },
+    "temperature": {
+      "min_inclusive": 0.2
+    },
+    "humidity": {
+      "min_inclusive": -0.0999,
+      "max_inclusive": 0.0999
+    },
+    "depth": {
+      "max_inclusive": 0.18
+    }
+  }
+}

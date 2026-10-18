@@ -1,0 +1,31 @@
+{
+  "feature": "taleks-better-landscape:mountain_boulder",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 1
+    },
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 2
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "MOTION_BLOCKING"
+    },
+    {
+      "type": "lithostitched:condition",
+      "condition": {
+        "type": "lithostitched:sample_density",
+        "density_function": "taleks-better-landscape:mountain_mask",
+        "min_inclusive": 0.15
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}
