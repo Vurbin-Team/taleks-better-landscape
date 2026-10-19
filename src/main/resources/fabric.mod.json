@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "id": "taleks-better-landscape",
   "version": "${version}",
-  "name": "Fantasy Terrain",
-  "description": "Fairy-tale terrain: coastal sea stacks and more. Changes terrain shape only.",
+  "name": "Talek's Better Landscape",
+  "description": "Cinematic terrain generation. Changes terrain shape only!",
   "authors": [
     "Talek"
   ],
