@@ -1,0 +1,21 @@
+{
+  "type": "lithostitched:weighted_selector",
+  "config": {
+    "features": [
+      {
+        "weight": 1,
+        "data": {
+          "feature": "taleks-better-landscape:stylized_rock_calcite_diorite",
+          "placement": []
+        }
+      },
+      {
+        "weight": 1,
+        "data": {
+          "feature": "taleks-better-landscape:stylized_rock_andesite_gravel_tuff",
+          "placement": []
+        }
+      }
+    ]
+  }
+}

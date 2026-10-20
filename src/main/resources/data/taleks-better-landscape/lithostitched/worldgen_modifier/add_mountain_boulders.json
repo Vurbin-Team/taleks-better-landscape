@@ -1,6 +1,0 @@
-{
-  "type": "lithostitched:add_features",
-  "biomes": "#minecraft:is_overworld",
-  "features": "taleks-better-landscape:mountain_boulder",
-  "step": "local_modifications"
-}
