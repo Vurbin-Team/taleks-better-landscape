@@ -1,0 +1,13 @@
+{
+  "type": "lithostitched:add_features",
+  "biomes": [
+    "minecraft:flower_forest"
+  ],
+  "features": [
+    "taleks-better-landscape:canopy_flower_forest_0",
+    "taleks-better-landscape:canopy_flower_forest_1",
+    "taleks-better-landscape:canopy_flower_forest_2",
+    "taleks-better-landscape:canopy_flower_forest_3"
+  ],
+  "step": "vegetal_decoration"
+}

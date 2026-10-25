@@ -65,10 +65,10 @@
                                 "left": {
                                   "type": "minecraft:gradient",
                                   "axis": "x",
-                                  "from_coordinate": -30000000,
-                                  "from_value": -30000000.0,
-                                  "to_coordinate": 30000000,
-                                  "to_value": 30000000.0
+                                  "from_coordinate": -1000000,
+                                  "from_value": -1000000.0,
+                                  "to_coordinate": 1000000,
+                                  "to_value": 1000000.0
                                 },
                                 "right": 0.906
                               },
@@ -77,10 +77,10 @@
                                 "left": {
                                   "type": "minecraft:gradient",
                                   "axis": "z",
-                                  "from_coordinate": -30000000,
-                                  "from_value": -30000000.0,
-                                  "to_coordinate": 30000000,
-                                  "to_value": 30000000.0
+                                  "from_coordinate": -1000000,
+                                  "from_value": -1000000.0,
+                                  "to_coordinate": 1000000,
+                                  "to_value": 1000000.0
                                 },
                                 "right": 0.423
                               }

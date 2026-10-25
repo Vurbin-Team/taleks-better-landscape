@@ -1,0 +1,13 @@
+{
+  "type": "lithostitched:add_features",
+  "biomes": [
+    "minecraft:taiga"
+  ],
+  "features": [
+    "taleks-better-landscape:canopy_taiga_0",
+    "taleks-better-landscape:canopy_taiga_1",
+    "taleks-better-landscape:canopy_taiga_2",
+    "taleks-better-landscape:canopy_taiga_3"
+  ],
+  "step": "vegetal_decoration"
+}
