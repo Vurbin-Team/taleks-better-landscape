@@ -40,7 +40,7 @@
               "type": "minecraft:noise_threshold",
               "noise": "taleks-better-landscape:forest_floor_mask",
               "min_threshold": -100000000.0,
-              "max_threshold": 0.15
+              "max_threshold": -0.05
             },
             "then_run": {
               "type": "minecraft:sequence",
