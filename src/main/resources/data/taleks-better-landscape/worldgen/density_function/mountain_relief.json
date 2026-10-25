@@ -1,50 +1,55 @@
 {
-  "type": "minecraft:flat_cache",
-  "argument": {
-    "type": "minecraft:add",
-    "argument1": {
-      "type": "minecraft:mul",
-      "argument1": 0.8,
-      "argument2": {
+  "type": "minecraft:cache",
+  "input": {
+    "type": "minecraft:slice",
+    "axis": "y",
+    "coordinate": 0,
+    "input": {
+      "type": "minecraft:add",
+      "left": {
         "type": "minecraft:mul",
-        "argument1": {
-          "type": "minecraft:square",
-          "argument": "taleks-better-landscape:mountain_mask"
-        },
-        "argument2": "taleks-better-landscape:mountain_shape"
-      }
-    },
-    "argument2": {
-      "type": "minecraft:mul",
-      "argument1": 0.16,
-      "argument2": {
-        "type": "minecraft:mul",
-        "argument1": "taleks-better-landscape:windswept_mask",
-        "argument2": {
-          "type": "minecraft:add",
-          "argument1": {
+        "left": 0.8,
+        "right": {
+          "type": "minecraft:mul",
+          "left": {
             "type": "minecraft:square",
-            "argument": {
-              "type": "minecraft:clamp",
-              "input": {
-                "type": "minecraft:mul",
-                "argument1": 0.9523809523809523,
-                "argument2": {
-                  "type": "minecraft:add",
-                  "argument1": {
-                    "type": "lithostitched:fast_noise",
-                    "config": "taleks-better-landscape:windswept_ridges",
-                    "xz_scale": 1.0,
-                    "y_scale": 0.0
-                  },
-                  "argument2": 0.2
-                }
-              },
-              "min": 0,
-              "max": 1
-            }
+            "input": "taleks-better-landscape:mountain_mask"
           },
-          "argument2": -0.2
+          "right": "taleks-better-landscape:mountain_shape"
+        }
+      },
+      "right": {
+        "type": "minecraft:mul",
+        "left": 0.16,
+        "right": {
+          "type": "minecraft:mul",
+          "left": "taleks-better-landscape:windswept_mask",
+          "right": {
+            "type": "minecraft:add",
+            "left": {
+              "type": "minecraft:square",
+              "input": {
+                "type": "minecraft:clamp",
+                "input": {
+                  "type": "minecraft:mul",
+                  "left": 0.9523809523809523,
+                  "right": {
+                    "type": "minecraft:add",
+                    "left": {
+                      "type": "lithostitched:fast_noise",
+                      "config": "taleks-better-landscape:windswept_ridges",
+                      "xz_scale": 1.0,
+                      "y_scale": 0.0
+                    },
+                    "right": 0.2
+                  }
+                },
+                "min": 0,
+                "max": 1
+              }
+            },
+            "right": -0.2
+          }
         }
       }
     }

@@ -3,22 +3,27 @@
   "priority": 1200,
   "target_function": "minecraft:overworld/offset",
   "wrapper_function": {
-    "type": "lithostitched:mix",
-    "input": "taleks-better-landscape:fantasy_mask",
-    "argument1": {
+    "type": "minecraft:lerp",
+    "alpha": {
+      "type": "minecraft:clamp",
+      "input": "taleks-better-landscape:fantasy_mask",
+      "min": 0,
+      "max": 1
+    },
+    "first": {
       "type": "lithostitched:wrapped_marker"
     },
-    "argument2": {
+    "second": {
       "type": "minecraft:add",
-      "argument1": {
+      "left": {
         "type": "lithostitched:wrapped_marker"
       },
-      "argument2": {
+      "right": {
         "type": "minecraft:mul",
-        "argument1": {
+        "left": {
           "type": "minecraft:blend_alpha"
         },
-        "argument2": "taleks-better-landscape:fantasy_delta"
+        "right": "taleks-better-landscape:fantasy_delta"
       }
     }
   }

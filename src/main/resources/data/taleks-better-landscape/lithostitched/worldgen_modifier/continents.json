@@ -2,20 +2,25 @@
   "type": "lithostitched:wrap_density_function",
   "target_function": "minecraft:overworld/continents",
   "wrapper_function": {
-    "type": "minecraft:flat_cache",
-    "argument": {
-      "type": "minecraft:clamp",
+    "type": "minecraft:cache",
+    "input": {
+      "type": "minecraft:slice",
+      "axis": "y",
+      "coordinate": 0,
       "input": {
-        "type": "minecraft:mul",
-        "argument1": 1.3,
-        "argument2": {
-          "type": "lithostitched:fast_noise",
-          "config": "taleks-better-landscape:continents",
-          "y_scale": 0
-        }
-      },
-      "min": -1,
-      "max": 1
+        "type": "minecraft:clamp",
+        "input": {
+          "type": "minecraft:mul",
+          "left": 1.3,
+          "right": {
+            "type": "lithostitched:fast_noise",
+            "config": "taleks-better-landscape:continents",
+            "y_scale": 0
+          }
+        },
+        "min": -1,
+        "max": 1
+      }
     }
   }
 }
