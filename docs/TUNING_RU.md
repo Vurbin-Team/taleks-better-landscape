@@ -42,3 +42,16 @@
 ## Замечания
 - Превью в `docs/previews` посчитаны по высоте `offset` (без ванильного 3D-шума и jaggedness), в игре горы будут чуть выше и рваннее.
 - Моды с биомами/структурами, привязанными к тегам вроде `is_mountain`, увидят эти биомы там, где теперь горы.
+
+## Скалистые пики (`rocky_peaks.json`)
+Работает только в `jagged_peaks`, `stony_peaks`, `frozen_peaks`. Все ручки это числа в JSON.
+
+| Что изменить | Где | Сейчас |
+|---|---|---|
+| Сколько склонов становится камнем | `lithostitched:slope` `[2, 256]` в `rocky_peaks.json` (больше число = только круче) | от 2 блоков перепада |
+| Доля камня на пологих склонах | порог `peak_rock_cover` у `slope [1,1]` (выше = меньше камня) | -0.05 |
+| Камень на ровном | порог `peak_rock_cover` у `slope [0,0]` и `fraction` 0.5 | 0.14 |
+| Где кончаются предгорья | `peak` `fraction min` (0.10) и `min_relief` (40) | 0.10 / 40 |
+| Размер шапки без изменений | `peak` `drop min` | 15.001 |
+| Размер пятен породы | `firstOctave` в `worldgen/noise/peak_rock_tone.json` и `peak_rock_cover.json` | -3 / -4 |
+| Трава в горах | в `mountain_blocks.json` список биомов у ветки `grass_block` | meadow, windswept (без `stony_peaks`) |
