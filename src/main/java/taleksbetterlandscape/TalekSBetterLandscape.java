@@ -25,6 +25,9 @@ public class TalekSBetterLandscape implements ModInitializer {
 		Registry.register(BuiltInRegistries.FEATURE, id("shore_shelf"), new ShoreShelfFeature());
 		Registry.register(BuiltInRegistries.FEATURE, id("rocky_cove"), new RockyCoveFeature());
 
+		// surface rule condition for mountain snow, ice and the rock gradient (see mountain_blocks.json)
+		Registry.register(BuiltInRegistries.MATERIAL_CONDITION, id("peak"), PeakCondition.CODEC.codec());
+
 		// no cave/canyon carvers on beaches
 		BiomeModifications.create(id("no_beach_carvers")).add(ModificationPhase.REMOVALS,
 			BiomeSelectors.includeByKey(Biomes.BEACH, Biomes.SNOWY_BEACH),

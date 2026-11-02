@@ -12,6 +12,7 @@
   "entrypoints": {
     "main": ["taleksbetterlandscape.TalekSBetterLandscape"]
   },
+  "accessWidener": "taleks-better-landscape.accesswidener",
   "mixins": [
     "taleks-better-landscape.mixins.json"
   ],
