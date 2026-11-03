@@ -289,51 +289,40 @@
       {
         "type": "minecraft:condition",
         "if_true": {
-          "type": "minecraft:noise_threshold",
-          "noise": "taleks-better-landscape:fantasy_zone",
-          "min_threshold": 0.5,
-          "max_threshold": 10.0
+          "type": "minecraft:not",
+          "invert": {
+            "type": "minecraft:biome",
+            "biome_is": [
+              "minecraft:badlands",
+              "minecraft:eroded_badlands",
+              "minecraft:wooded_badlands"
+            ]
+          }
         },
         "then_run": {
           "type": "minecraft:condition",
           "if_true": {
-            "type": "minecraft:steep"
+            "type": "minecraft:noise_threshold",
+            "noise": "taleks-better-landscape:fantasy_zone",
+            "min_threshold": 0.5,
+            "max_threshold": 10.0
           },
           "then_run": {
-            "type": "minecraft:sequence",
-            "sequence": [
-              {
-                "type": "minecraft:condition",
-                "if_true": {
-                  "type": "minecraft:stone_depth",
-                  "offset": 0,
-                  "surface_type": "floor",
-                  "add_surface_depth": false,
-                  "secondary_depth_range": 0
-                },
-                "then_run": {
-                  "type": "minecraft:block",
-                  "result_state": {
-                    "Name": "minecraft:stone"
-                  }
-                }
-              },
-              {
-                "type": "minecraft:condition",
-                "if_true": {
-                  "type": "minecraft:stone_depth",
-                  "offset": 1,
-                  "surface_type": "floor",
-                  "add_surface_depth": false,
-                  "secondary_depth_range": 0
-                },
-                "then_run": {
+            "type": "minecraft:condition",
+            "if_true": {
+              "type": "minecraft:steep"
+            },
+            "then_run": {
+              "type": "minecraft:sequence",
+              "sequence": [
+                {
                   "type": "minecraft:condition",
                   "if_true": {
-                    "type": "minecraft:noise_threshold",
-                    "noise": "minecraft:surface_swamp",
-                    "min_threshold": 0.0,
-                    "max_threshold": 10
+                    "type": "minecraft:stone_depth",
+                    "offset": 0,
+                    "surface_type": "floor",
+                    "add_surface_depth": false,
+                    "secondary_depth_range": 0
                   },
                   "then_run": {
                     "type": "minecraft:block",
@@ -341,40 +330,40 @@
                       "Name": "minecraft:stone"
                     }
                   }
-                }
-              },
-              {
-                "type": "minecraft:condition",
-                "if_true": {
-                  "type": "minecraft:stone_depth",
-                  "offset": 1,
-                  "surface_type": "floor",
-                  "add_surface_depth": false,
-                  "secondary_depth_range": 0
                 },
-                "then_run": {
-                  "type": "minecraft:block",
-                  "result_state": {
-                    "Name": "minecraft:andesite"
-                  }
-                }
-              },
-              {
-                "type": "minecraft:condition",
-                "if_true": {
-                  "type": "minecraft:stone_depth",
-                  "offset": 2,
-                  "surface_type": "floor",
-                  "add_surface_depth": false,
-                  "secondary_depth_range": 0
-                },
-                "then_run": {
+                {
                   "type": "minecraft:condition",
                   "if_true": {
-                    "type": "minecraft:noise_threshold",
-                    "noise": "minecraft:surface_swamp",
-                    "min_threshold": 0.0,
-                    "max_threshold": 10
+                    "type": "minecraft:stone_depth",
+                    "offset": 1,
+                    "surface_type": "floor",
+                    "add_surface_depth": false,
+                    "secondary_depth_range": 0
+                  },
+                  "then_run": {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:noise_threshold",
+                      "noise": "minecraft:surface_swamp",
+                      "min_threshold": 0.0,
+                      "max_threshold": 10
+                    },
+                    "then_run": {
+                      "type": "minecraft:block",
+                      "result_state": {
+                        "Name": "minecraft:stone"
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "minecraft:condition",
+                  "if_true": {
+                    "type": "minecraft:stone_depth",
+                    "offset": 1,
+                    "surface_type": "floor",
+                    "add_surface_depth": false,
+                    "secondary_depth_range": 0
                   },
                   "then_run": {
                     "type": "minecraft:block",
@@ -382,76 +371,90 @@
                       "Name": "minecraft:andesite"
                     }
                   }
-                }
-              },
-              {
-                "type": "minecraft:condition",
-                "if_true": {
-                  "type": "minecraft:stone_depth",
-                  "offset": 0,
-                  "surface_type": "floor",
-                  "add_surface_depth": true,
-                  "secondary_depth_range": 0
                 },
-                "then_run": {
-                  "type": "minecraft:block",
-                  "result_state": {
-                    "Name": "minecraft:gravel"
+                {
+                  "type": "minecraft:condition",
+                  "if_true": {
+                    "type": "minecraft:stone_depth",
+                    "offset": 2,
+                    "surface_type": "floor",
+                    "add_surface_depth": false,
+                    "secondary_depth_range": 0
+                  },
+                  "then_run": {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:noise_threshold",
+                      "noise": "minecraft:surface_swamp",
+                      "min_threshold": 0.0,
+                      "max_threshold": 10
+                    },
+                    "then_run": {
+                      "type": "minecraft:block",
+                      "result_state": {
+                        "Name": "minecraft:andesite"
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "minecraft:condition",
+                  "if_true": {
+                    "type": "minecraft:stone_depth",
+                    "offset": 0,
+                    "surface_type": "floor",
+                    "add_surface_depth": true,
+                    "secondary_depth_range": 0
+                  },
+                  "then_run": {
+                    "type": "minecraft:block",
+                    "result_state": {
+                      "Name": "minecraft:gravel"
+                    }
                   }
                 }
-              }
-            ]
+              ]
+            }
           }
         }
       },
       {
         "type": "minecraft:condition",
         "if_true": {
-          "type": "minecraft:noise_threshold",
-          "noise": "taleks-better-landscape:forest_spire_zone",
-          "min_threshold": 0.62,
-          "max_threshold": 10.0
+          "type": "minecraft:not",
+          "invert": {
+            "type": "minecraft:biome",
+            "biome_is": [
+              "minecraft:badlands",
+              "minecraft:eroded_badlands",
+              "minecraft:wooded_badlands"
+            ]
+          }
         },
         "then_run": {
           "type": "minecraft:condition",
           "if_true": {
-            "type": "minecraft:steep"
+            "type": "minecraft:noise_threshold",
+            "noise": "taleks-better-landscape:forest_spire_zone",
+            "min_threshold": 0.62,
+            "max_threshold": 10.0
           },
           "then_run": {
-            "type": "minecraft:sequence",
-            "sequence": [
-              {
-                "type": "minecraft:condition",
-                "if_true": {
-                  "type": "minecraft:stone_depth",
-                  "offset": 0,
-                  "surface_type": "floor",
-                  "add_surface_depth": false,
-                  "secondary_depth_range": 0
-                },
-                "then_run": {
-                  "type": "minecraft:block",
-                  "result_state": {
-                    "Name": "minecraft:stone"
-                  }
-                }
-              },
-              {
-                "type": "minecraft:condition",
-                "if_true": {
-                  "type": "minecraft:stone_depth",
-                  "offset": 1,
-                  "surface_type": "floor",
-                  "add_surface_depth": false,
-                  "secondary_depth_range": 0
-                },
-                "then_run": {
+            "type": "minecraft:condition",
+            "if_true": {
+              "type": "minecraft:steep"
+            },
+            "then_run": {
+              "type": "minecraft:sequence",
+              "sequence": [
+                {
                   "type": "minecraft:condition",
                   "if_true": {
-                    "type": "minecraft:noise_threshold",
-                    "noise": "minecraft:surface_swamp",
-                    "min_threshold": 0.0,
-                    "max_threshold": 10
+                    "type": "minecraft:stone_depth",
+                    "offset": 0,
+                    "surface_type": "floor",
+                    "add_surface_depth": false,
+                    "secondary_depth_range": 0
                   },
                   "then_run": {
                     "type": "minecraft:block",
@@ -459,40 +462,40 @@
                       "Name": "minecraft:stone"
                     }
                   }
-                }
-              },
-              {
-                "type": "minecraft:condition",
-                "if_true": {
-                  "type": "minecraft:stone_depth",
-                  "offset": 1,
-                  "surface_type": "floor",
-                  "add_surface_depth": false,
-                  "secondary_depth_range": 0
                 },
-                "then_run": {
-                  "type": "minecraft:block",
-                  "result_state": {
-                    "Name": "minecraft:andesite"
-                  }
-                }
-              },
-              {
-                "type": "minecraft:condition",
-                "if_true": {
-                  "type": "minecraft:stone_depth",
-                  "offset": 2,
-                  "surface_type": "floor",
-                  "add_surface_depth": false,
-                  "secondary_depth_range": 0
-                },
-                "then_run": {
+                {
                   "type": "minecraft:condition",
                   "if_true": {
-                    "type": "minecraft:noise_threshold",
-                    "noise": "minecraft:surface_swamp",
-                    "min_threshold": 0.0,
-                    "max_threshold": 10
+                    "type": "minecraft:stone_depth",
+                    "offset": 1,
+                    "surface_type": "floor",
+                    "add_surface_depth": false,
+                    "secondary_depth_range": 0
+                  },
+                  "then_run": {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:noise_threshold",
+                      "noise": "minecraft:surface_swamp",
+                      "min_threshold": 0.0,
+                      "max_threshold": 10
+                    },
+                    "then_run": {
+                      "type": "minecraft:block",
+                      "result_state": {
+                        "Name": "minecraft:stone"
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "minecraft:condition",
+                  "if_true": {
+                    "type": "minecraft:stone_depth",
+                    "offset": 1,
+                    "surface_type": "floor",
+                    "add_surface_depth": false,
+                    "secondary_depth_range": 0
                   },
                   "then_run": {
                     "type": "minecraft:block",
@@ -500,25 +503,50 @@
                       "Name": "minecraft:andesite"
                     }
                   }
-                }
-              },
-              {
-                "type": "minecraft:condition",
-                "if_true": {
-                  "type": "minecraft:stone_depth",
-                  "offset": 0,
-                  "surface_type": "floor",
-                  "add_surface_depth": true,
-                  "secondary_depth_range": 0
                 },
-                "then_run": {
-                  "type": "minecraft:block",
-                  "result_state": {
-                    "Name": "minecraft:gravel"
+                {
+                  "type": "minecraft:condition",
+                  "if_true": {
+                    "type": "minecraft:stone_depth",
+                    "offset": 2,
+                    "surface_type": "floor",
+                    "add_surface_depth": false,
+                    "secondary_depth_range": 0
+                  },
+                  "then_run": {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:noise_threshold",
+                      "noise": "minecraft:surface_swamp",
+                      "min_threshold": 0.0,
+                      "max_threshold": 10
+                    },
+                    "then_run": {
+                      "type": "minecraft:block",
+                      "result_state": {
+                        "Name": "minecraft:andesite"
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "minecraft:condition",
+                  "if_true": {
+                    "type": "minecraft:stone_depth",
+                    "offset": 0,
+                    "surface_type": "floor",
+                    "add_surface_depth": true,
+                    "secondary_depth_range": 0
+                  },
+                  "then_run": {
+                    "type": "minecraft:block",
+                    "result_state": {
+                      "Name": "minecraft:gravel"
+                    }
                   }
                 }
-              }
-            ]
+              ]
+            }
           }
         }
       }
