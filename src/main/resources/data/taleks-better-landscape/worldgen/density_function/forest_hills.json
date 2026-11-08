@@ -1,21 +1,16 @@
 {
-  "type": "minecraft:cache",
-  "input": {
-    "type": "minecraft:slice",
-    "axis": "y",
-    "coordinate": 0,
-    "input": {
+  "type": "minecraft:flat_cache",
+  "argument": {
+    "type": "minecraft:mul",
+    "argument1": 0.1,
+    "argument2": {
       "type": "minecraft:mul",
-      "left": 0.1,
-      "right": {
-        "type": "minecraft:mul",
-        "left": "taleks-better-landscape:forest_hills_mask",
-        "right": {
-          "type": "lithostitched:fast_noise",
-          "config": "taleks-better-landscape:hills",
-          "xz_scale": 1.0,
-          "y_scale": 0.0
-        }
+      "argument1": "taleks-better-landscape:forest_hills_mask",
+      "argument2": {
+        "type": "lithostitched:fast_noise",
+        "config": "taleks-better-landscape:hills",
+        "xz_scale": 1.0,
+        "y_scale": 0.0
       }
     }
   }

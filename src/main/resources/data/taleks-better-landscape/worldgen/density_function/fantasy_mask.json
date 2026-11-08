@@ -1,58 +1,53 @@
 {
-  "type": "minecraft:cache",
-  "input": {
-    "type": "minecraft:slice",
-    "axis": "y",
-    "coordinate": 0,
-    "input": {
+  "type": "minecraft:flat_cache",
+  "argument": {
+    "type": "minecraft:mul",
+    "argument1": {
       "type": "minecraft:mul",
-      "left": {
-        "type": "minecraft:mul",
-        "left": {
-          "type": "minecraft:clamp",
-          "input": {
-            "type": "minecraft:mul",
-            "left": 6.250000000000001,
-            "right": {
-              "type": "minecraft:add",
-              "left": "taleks-better-landscape:fantasy_zone",
-              "right": -0.42
-            }
-          },
-          "min": 0,
-          "max": 1
-        },
-        "right": {
-          "type": "minecraft:clamp",
-          "input": {
-            "type": "minecraft:mul",
-            "left": 5.0,
-            "right": {
-              "type": "minecraft:add",
-              "left": "minecraft:overworld/continents",
-              "right": -0.0
-            }
-          },
-          "min": 0,
-          "max": 1
-        }
-      },
-      "right": {
-        "type": "minecraft:add",
-        "left": 1,
-        "right": {
+      "argument1": {
+        "type": "minecraft:clamp",
+        "input": {
           "type": "minecraft:mul",
-          "left": -1,
-          "right": {
-            "type": "minecraft:clamp",
-            "input": {
-              "type": "minecraft:mul",
-              "left": 2,
-              "right": "taleks-better-landscape:mountain_mask"
-            },
-            "min": 0,
-            "max": 1
+          "argument1": 6.250000000000001,
+          "argument2": {
+            "type": "minecraft:add",
+            "argument1": "taleks-better-landscape:fantasy_zone",
+            "argument2": -0.42
           }
+        },
+        "min": 0,
+        "max": 1
+      },
+      "argument2": {
+        "type": "minecraft:clamp",
+        "input": {
+          "type": "minecraft:mul",
+          "argument1": 5.0,
+          "argument2": {
+            "type": "minecraft:add",
+            "argument1": "minecraft:overworld/continents",
+            "argument2": -0.0
+          }
+        },
+        "min": 0,
+        "max": 1
+      }
+    },
+    "argument2": {
+      "type": "minecraft:add",
+      "argument1": 1,
+      "argument2": {
+        "type": "minecraft:mul",
+        "argument1": -1,
+        "argument2": {
+          "type": "minecraft:clamp",
+          "input": {
+            "type": "minecraft:mul",
+            "argument1": 2,
+            "argument2": "taleks-better-landscape:mountain_mask"
+          },
+          "min": 0,
+          "max": 1
         }
       }
     }

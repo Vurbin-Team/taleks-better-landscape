@@ -1,0 +1,11 @@
+accessWidener v1 official
+
+# Surface rule conditions (same entries Lithostitched uses): PeakCondition extends LazyXZCondition
+accessible class net/minecraft/world/level/levelgen/SurfaceRules$Context
+accessible class net/minecraft/world/level/levelgen/SurfaceRules$Condition
+accessible class net/minecraft/world/level/levelgen/SurfaceRules$LazyXZCondition
+
+# fields read by PeakCondition (same names Lithostitched shadows in its own mixin)
+accessible field net/minecraft/world/level/levelgen/SurfaceRules$Context randomState Lnet/minecraft/world/level/levelgen/RandomState;
+accessible field net/minecraft/world/level/levelgen/SurfaceRules$Context blockX I
+accessible field net/minecraft/world/level/levelgen/SurfaceRules$Context blockZ I

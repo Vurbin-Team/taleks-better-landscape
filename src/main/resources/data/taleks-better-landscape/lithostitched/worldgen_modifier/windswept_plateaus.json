@@ -1,0 +1,18 @@
+{
+  "type": "lithostitched:wrap_density_function",
+  "priority": 1011,
+  "target_function": "minecraft:overworld/offset",
+  "wrapper_function": {
+    "type": "minecraft:add",
+    "argument1": {
+      "type": "lithostitched:wrapped_marker"
+    },
+    "argument2": {
+      "type": "minecraft:mul",
+      "argument1": {
+        "type": "minecraft:blend_alpha"
+      },
+      "argument2": "taleks-better-landscape:windswept_relief"
+    }
+  }
+}

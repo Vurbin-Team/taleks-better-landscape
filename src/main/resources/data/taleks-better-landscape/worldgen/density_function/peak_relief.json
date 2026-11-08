@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:flat_cache",
+  "argument": {
+    "type": "minecraft:mul",
+    "argument1": "taleks-better-landscape:peak_mask",
+    "argument2": "taleks-better-landscape:peak_crags"
+  }
+}

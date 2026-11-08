@@ -1,37 +1,32 @@
 {
-  "type": "minecraft:cache",
-  "input": {
-    "type": "minecraft:slice",
-    "axis": "y",
-    "coordinate": 0,
-    "input": {
-      "type": "minecraft:mul",
-      "left": 0.15,
-      "right": {
-        "type": "minecraft:floor",
-        "input": {
-          "type": "minecraft:mul",
-          "left": {
-            "type": "minecraft:clamp",
-            "input": {
-              "type": "minecraft:add",
-              "left": 0.6,
-              "right": {
-                "type": "minecraft:mul",
-                "left": 1.2,
-                "right": {
-                  "type": "lithostitched:fast_noise",
-                  "config": "taleks-better-landscape:tepui",
-                  "xz_scale": 1.0,
-                  "y_scale": 0.0
-                }
+  "type": "minecraft:flat_cache",
+  "argument": {
+    "type": "minecraft:mul",
+    "argument1": 0.15,
+    "argument2": {
+      "type": "lithostitched:floor",
+      "argument": {
+        "type": "minecraft:mul",
+        "argument1": {
+          "type": "minecraft:clamp",
+          "input": {
+            "type": "minecraft:add",
+            "argument1": 0.6,
+            "argument2": {
+              "type": "minecraft:mul",
+              "argument1": 1.2,
+              "argument2": {
+                "type": "lithostitched:fast_noise",
+                "config": "taleks-better-landscape:tepui",
+                "xz_scale": 1.0,
+                "y_scale": 0.0
               }
-            },
-            "min": 0,
-            "max": 0.999
+            }
           },
-          "right": 4
-        }
+          "min": 0,
+          "max": 0.999
+        },
+        "argument2": 4
       }
     }
   }

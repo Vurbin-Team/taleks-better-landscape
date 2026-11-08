@@ -3,9 +3,7 @@
   "target_function": "minecraft:overworld/caves/entrances",
   "wrapper_function": {
     "type": "minecraft:add",
-    "left": {
-      "type": "lithostitched:wrapped_marker"
-    },
-    "right": 20
+    "argument1": { "type": "lithostitched:wrapped_marker" },
+    "argument2": 20
   }
 }

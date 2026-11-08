@@ -2,16 +2,16 @@
   "type": "minecraft:clamp",
   "input": {
     "type": "minecraft:add",
-    "left": 2.5,
-    "right": {
+    "argument1": 2.5,
+    "argument2": {
       "type": "minecraft:mul",
-      "left": -25,
-      "right": {
+      "argument1": -25,
+      "argument2": {
         "type": "minecraft:abs",
-        "input": {
+        "argument": {
           "type": "minecraft:add",
-          "left": "minecraft:overworld/continents",
-          "right": 0.15
+          "argument1": "minecraft:overworld/continents",
+          "argument2": 0.15
         }
       }
     }

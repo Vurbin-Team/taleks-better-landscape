@@ -1,14 +1,9 @@
 {
-  "type": "minecraft:cache",
-  "input": {
-    "type": "minecraft:slice",
-    "axis": "y",
-    "coordinate": 0,
-    "input": {
-      "type": "minecraft:noise",
-      "noise": "taleks-better-landscape:fantasy_zone",
-      "xz_scale": 1.0,
-      "y_scale": 0.0
-    }
+  "type": "minecraft:flat_cache",
+  "argument": {
+    "type": "minecraft:noise",
+    "noise": "taleks-better-landscape:fantasy_zone",
+    "xz_scale": 1.0,
+    "y_scale": 0.0
   }
 }

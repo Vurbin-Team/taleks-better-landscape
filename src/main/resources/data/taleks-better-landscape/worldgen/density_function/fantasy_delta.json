@@ -1,37 +1,27 @@
 {
-  "type": "minecraft:cache",
-  "input": {
-    "type": "minecraft:slice",
-    "axis": "y",
-    "coordinate": 0,
+  "type": "minecraft:flat_cache",
+  "argument": {
+    "type": "lithostitched:mix",
     "input": {
-      "type": "minecraft:lerp",
-      "alpha": {
-        "type": "minecraft:clamp",
-        "input": {
-          "type": "minecraft:clamp",
-          "input": {
-            "type": "minecraft:mul",
-            "left": 5,
-            "right": {
-              "type": "minecraft:add",
-              "left": {
-                "type": "lithostitched:fast_noise",
-                "config": "taleks-better-landscape:fantasy_kind",
-                "xz_scale": 1.0,
-                "y_scale": 0.0
-              },
-              "right": 0.1
-            }
+      "type": "minecraft:clamp",
+      "input": {
+        "type": "minecraft:mul",
+        "argument1": 5,
+        "argument2": {
+          "type": "minecraft:add",
+          "argument1": {
+            "type": "lithostitched:fast_noise",
+            "config": "taleks-better-landscape:fantasy_kind",
+            "xz_scale": 1.0,
+            "y_scale": 0.0
           },
-          "min": 0,
-          "max": 1
-        },
-        "min": 0,
-        "max": 1
+          "argument2": 0.1
+        }
       },
-      "first": "taleks-better-landscape:spire_delta",
-      "second": "taleks-better-landscape:tepui_delta"
-    }
+      "min": 0,
+      "max": 1
+    },
+    "argument1": "taleks-better-landscape:spire_delta",
+    "argument2": "taleks-better-landscape:tepui_delta"
   }
 }

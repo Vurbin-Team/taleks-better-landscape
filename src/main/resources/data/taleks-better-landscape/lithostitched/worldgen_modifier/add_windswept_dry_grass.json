@@ -1,0 +1,13 @@
+{
+  "type": "lithostitched:add_features",
+  "biomes": [
+    "minecraft:windswept_hills",
+    "minecraft:windswept_forest",
+    "minecraft:windswept_savanna",
+    "minecraft:windswept_gravelly_hills"
+  ],
+  "features": [
+    "taleks-better-landscape:windswept_dry_grass"
+  ],
+  "step": "vegetal_decoration"
+}

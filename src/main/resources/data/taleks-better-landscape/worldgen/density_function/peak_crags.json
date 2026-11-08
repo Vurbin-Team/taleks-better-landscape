@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:flat_cache",
+  "argument": {
+    "type": "minecraft:add",
+    "argument1": {
+      "type": "minecraft:mul",
+      "argument1": 0.18,
+      "argument2": "taleks-better-landscape:peak_massif"
+    },
+    "argument2": {
+      "type": "minecraft:mul",
+      "argument1": -0.48,
+      "argument2": {
+        "type": "minecraft:mul",
+        "argument1": {
+          "type": "minecraft:square",
+          "argument": "taleks-better-landscape:mountain_mask"
+        },
+        "argument2": "taleks-better-landscape:peak_crag_term"
+      }
+    }
+  }
+}
