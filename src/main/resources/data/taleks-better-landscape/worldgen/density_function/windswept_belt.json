@@ -1,0 +1,39 @@
+{
+  "type": "minecraft:mul",
+  "argument1": {
+    "type": "minecraft:clamp",
+    "input": {
+      "type": "minecraft:mul",
+      "argument1": 16.666666666666668,
+      "argument2": {
+        "type": "minecraft:add",
+        "argument1": "taleks-better-landscape:mountain_mask",
+        "argument2": -0.38
+      }
+    },
+    "min": 0.0,
+    "max": 1.0
+  },
+  "argument2": {
+    "type": "minecraft:add",
+    "argument1": 1.0,
+    "argument2": {
+      "type": "minecraft:mul",
+      "argument1": -1.0,
+      "argument2": {
+        "type": "minecraft:clamp",
+        "input": {
+          "type": "minecraft:mul",
+          "argument1": 12.500000000000007,
+          "argument2": {
+            "type": "minecraft:add",
+            "argument1": "taleks-better-landscape:mountain_mask",
+            "argument2": -0.54
+          }
+        },
+        "min": 0.0,
+        "max": 1.0
+      }
+    }
+  }
+}
