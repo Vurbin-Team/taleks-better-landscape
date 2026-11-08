@@ -1,39 +1,55 @@
 {
   "type": "minecraft:simple_block",
   "to_place": {
-    "type": "minecraft:weighted_state_provider",
+    "type": "minecraft:weighted",
     "entries": [
       {
         "weight": 3,
-        "data": "minecraft:stone"
+        "data": {
+          "id": "minecraft:stone"
+        }
       },
       {
         "weight": 3,
-        "data": "minecraft:andesite"
+        "data": {
+          "id": "minecraft:andesite"
+        }
       },
       {
         "weight": 1,
-        "data": "minecraft:cobblestone"
+        "data": {
+          "id": "minecraft:cobblestone"
+        }
       },
       {
         "weight": 2,
-        "data": "minecraft:mossy_cobblestone"
+        "data": {
+          "id": "minecraft:mossy_cobblestone"
+        }
       },
       {
         "weight": 3,
-        "data": "minecraft:andesite_slab"
+        "data": {
+          "id": "minecraft:andesite_slab"
+        }
       },
       {
         "weight": 2,
-        "data": "minecraft:stone_slab"
+        "data": {
+          "id": "minecraft:stone_slab"
+        }
       },
       {
         "weight": 1,
-        "data": "minecraft:cobblestone_slab"
+        "data": {
+          "id": "minecraft:cobblestone_slab"
+        }
       },
       {
         "weight": 1,
-        "data": "minecraft:mossy_cobblestone_slab"
+        "data": {
+          "id": "minecraft:mossy_cobblestone_slab"
+        }
       }
     ]
   }

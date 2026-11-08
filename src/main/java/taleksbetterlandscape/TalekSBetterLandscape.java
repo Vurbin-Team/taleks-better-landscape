@@ -17,7 +17,7 @@ public class TalekSBetterLandscape implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		// surface rule condition for mountain snow, ice and the rock gradient (see mountain_blocks.json)
-		Registry.register(BuiltInRegistries.MATERIAL_CONDITION, id("peak"), PeakCondition.CODEC);
+		Registry.register(BuiltInRegistries.MATERIAL_CONDITION_TYPE, id("peak"), PeakCondition.CODEC);
 	}
 
 	public static Identifier id(String path) {
