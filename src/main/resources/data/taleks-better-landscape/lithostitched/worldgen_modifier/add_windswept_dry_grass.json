@@ -7,7 +7,7 @@
     "minecraft:windswept_gravelly_hills"
   ],
   "features": [
-    "minecraft:patch_dry_grass_desert"
+    "taleks-better-landscape:windswept_dry_grass"
   ],
   "step": "vegetal_decoration"
 }
