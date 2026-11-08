@@ -1,0 +1,13 @@
+{
+  "type": "lithostitched:add_features",
+  "biomes": [
+    "minecraft:windswept_hills",
+    "minecraft:windswept_forest",
+    "minecraft:windswept_savanna",
+    "minecraft:windswept_gravelly_hills"
+  ],
+  "features": [
+    "minecraft:patch_dry_grass_desert"
+  ],
+  "step": "vegetal_decoration"
+}

@@ -10,11 +10,7 @@
       "type": "minecraft:biome",
       "biome_is": [
         "minecraft:meadow",
-        "minecraft:stony_peaks",
-        "minecraft:windswept_hills",
-        "minecraft:windswept_gravelly_hills",
-        "minecraft:windswept_forest",
-        "minecraft:windswept_savanna"
+        "minecraft:stony_peaks"
       ]
     },
     "then_run": {
@@ -104,11 +100,7 @@
                 "if_true": {
                   "type": "minecraft:biome",
                   "biome_is": [
-                    "minecraft:meadow",
-                    "minecraft:windswept_hills",
-                    "minecraft:windswept_gravelly_hills",
-                    "minecraft:windswept_forest",
-                    "minecraft:windswept_savanna"
+                    "minecraft:meadow"
                   ]
                 },
                 "then_run": {

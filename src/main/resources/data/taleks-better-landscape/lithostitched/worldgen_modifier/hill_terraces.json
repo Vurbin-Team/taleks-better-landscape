@@ -25,10 +25,7 @@
         "minecraft:savanna_plateau",
         "minecraft:jungle",
         "minecraft:sparse_jungle",
-        "minecraft:bamboo_jungle",
-        "minecraft:windswept_hills",
-        "minecraft:windswept_forest",
-        "minecraft:windswept_savanna"
+        "minecraft:bamboo_jungle"
       ]
     },
     "then_run": {

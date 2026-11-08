@@ -1,0 +1,13 @@
+{
+  "type": "lithostitched:add_features",
+  "biomes": [
+    "minecraft:windswept_hills",
+    "minecraft:windswept_forest",
+    "minecraft:windswept_savanna"
+  ],
+  "features": [
+    "taleks-better-landscape:windswept_boulder",
+    "taleks-better-landscape:windswept_stones"
+  ],
+  "step": "local_modifications"
+}
