@@ -9,7 +9,7 @@
     },
     "argument2": {
       "type": "minecraft:mul",
-      "argument1": 38.4,
+      "argument1": 0.3,
       "argument2": "taleks-better-landscape:windswept_shelf"
     }
   }
