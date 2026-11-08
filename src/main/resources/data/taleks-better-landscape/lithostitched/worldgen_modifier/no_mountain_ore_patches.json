@@ -1,0 +1,18 @@
+{
+  "type": "lithostitched:remove_features",
+  "biomes": [
+    "minecraft:jagged_peaks",
+    "minecraft:stony_peaks",
+    "minecraft:frozen_peaks",
+    "minecraft:windswept_hills",
+    "minecraft:windswept_gravelly_hills",
+    "minecraft:windswept_forest",
+    "minecraft:windswept_savanna"
+  ],
+  "features": [
+    "minecraft:ore_dirt",
+    "minecraft:ore_granite_upper",
+    "minecraft:ore_granite_lower"
+  ],
+  "step": "underground_ores"
+}

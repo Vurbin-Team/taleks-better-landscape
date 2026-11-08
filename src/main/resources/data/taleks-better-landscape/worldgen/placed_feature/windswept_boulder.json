@@ -1,0 +1,56 @@
+{
+  "feature": "taleks-better-landscape:windswept_boulder",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": {
+        "type": "minecraft:uniform",
+        "min_inclusive": 0,
+        "max_inclusive": 2
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "WORLD_SURFACE_WG"
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:solid",
+        "offset": [
+          0,
+          -1,
+          0
+        ]
+      }
+    },
+    {
+      "type": "lithostitched:condition",
+      "condition": {
+        "type": "lithostitched:grid",
+        "radius": 4,
+        "distance_between_points": 4,
+        "allowed_count": 9,
+        "condition": {
+          "type": "lithostitched:height_filter",
+          "range_type": "heightmap_relative",
+          "heightmap": "WORLD_SURFACE_WG",
+          "permitted_range": [
+            -3,
+            3
+          ]
+        }
+      }
+    },
+    {
+      "type": "lithostitched:offset",
+      "y_offset": -2
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

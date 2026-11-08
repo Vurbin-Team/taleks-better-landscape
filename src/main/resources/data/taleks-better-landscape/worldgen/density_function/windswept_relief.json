@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:flat_cache",
+  "argument": {
+    "type": "minecraft:mul",
+    "argument1": "taleks-better-landscape:windswept_belt",
+    "argument2": {
+      "type": "minecraft:add",
+      "argument1": {
+        "type": "minecraft:mul",
+        "argument1": 0.18,
+        "argument2": {
+          "type": "lithostitched:fast_noise",
+          "config": "taleks-better-landscape:windswept_swell",
+          "xz_scale": 1.0,
+          "y_scale": 0.0
+        }
+      },
+      "argument2": {
+        "type": "minecraft:mul",
+        "argument1": 0.035,
+        "argument2": {
+          "type": "lithostitched:fast_noise",
+          "config": "taleks-better-landscape:windswept_bumps",
+          "xz_scale": 1.0,
+          "y_scale": 0.0
+        }
+      }
+    }
+  }
+}

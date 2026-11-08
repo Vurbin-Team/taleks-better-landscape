@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:flat_cache",
+  "argument": {
+    "type": "minecraft:square",
+    "argument": {
+      "type": "minecraft:clamp",
+      "input": {
+        "type": "minecraft:mul",
+        "argument1": 2.6315789473684212,
+        "argument2": {
+          "type": "minecraft:add",
+          "argument1": "taleks-better-landscape:mountain_mask",
+          "argument2": -0.62
+        }
+      },
+      "min": 0,
+      "max": 1
+    }
+  }
+}
