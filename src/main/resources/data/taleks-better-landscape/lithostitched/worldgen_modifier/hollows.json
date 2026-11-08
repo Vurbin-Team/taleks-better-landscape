@@ -1,0 +1,18 @@
+{
+  "type": "lithostitched:wrap_density_function",
+  "priority": 1125,
+  "target_function": "minecraft:overworld/offset",
+  "wrapper_function": {
+    "type": "minecraft:add",
+    "left": {
+      "type": "lithostitched:wrapped_marker"
+    },
+    "right": {
+      "type": "minecraft:mul",
+      "left": {
+        "type": "minecraft:blend_alpha"
+      },
+      "right": "taleks-better-landscape:hollow_delta"
+    }
+  }
+}

@@ -19,17 +19,23 @@
       "count": 12
     },
     {
-      "type": "minecraft:random_offset",
-      "xz_spread": {
+      "type": "minecraft:offset",
+      "x": {
         "type": "minecraft:trapezoid",
-        "min": -5,
         "max": 5,
+        "min": -5,
         "plateau": 0
       },
-      "y_spread": {
+      "y": {
         "type": "minecraft:trapezoid",
-        "min": -2,
         "max": 2,
+        "min": -2,
+        "plateau": 0
+      },
+      "z": {
+        "type": "minecraft:trapezoid",
+        "max": 5,
+        "min": -5,
         "plateau": 0
       }
     },
@@ -39,24 +45,15 @@
         "type": "minecraft:all_of",
         "predicates": [
           {
-            "type": "minecraft:matching_blocks",
-            "blocks": "minecraft:air"
+            "type": "minecraft:matching_block_tag",
+            "tag": "minecraft:air"
           },
           {
-            "type": "minecraft:matching_blocks",
+            "type": "minecraft:solid",
             "offset": [
               0,
               -1,
               0
-            ],
-            "blocks": [
-              "minecraft:grass_block",
-              "minecraft:podzol",
-              "minecraft:coarse_dirt",
-              "minecraft:dirt",
-              "minecraft:gravel",
-              "minecraft:stone",
-              "minecraft:andesite"
             ]
           }
         ]

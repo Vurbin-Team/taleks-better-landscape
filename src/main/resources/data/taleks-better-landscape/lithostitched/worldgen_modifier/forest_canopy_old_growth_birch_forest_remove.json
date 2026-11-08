@@ -1,0 +1,10 @@
+{
+  "type": "lithostitched:remove_features",
+  "biomes": [
+    "minecraft:old_growth_birch_forest"
+  ],
+  "features": [
+    "minecraft:birch_tall"
+  ],
+  "step": "vegetal_decoration"
+}

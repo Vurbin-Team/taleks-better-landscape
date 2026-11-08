@@ -1,74 +1,79 @@
 {
-  "type": "minecraft:flat_cache",
-  "argument": {
-    "type": "lithostitched:shift",
+  "type": "minecraft:cache",
+  "input": {
+    "type": "minecraft:slice",
+    "axis": "y",
+    "coordinate": 0,
     "input": {
-      "type": "minecraft:mul",
-      "argument1": 0.12,
-      "argument2": {
+      "type": "lithostitched:shift",
+      "input": {
         "type": "minecraft:mul",
-        "argument1": {
-          "type": "minecraft:clamp",
-          "input": {
-            "type": "minecraft:mul",
-            "argument1": 0.9523809523809523,
-            "argument2": {
-              "type": "minecraft:add",
-              "argument1": {
-                "type": "lithostitched:fast_noise",
-                "config": "taleks-better-landscape:crags",
-                "xz_scale": 1.0,
-                "y_scale": 0.0
-              },
-              "argument2": 0.25
-            }
-          },
-          "min": 0,
-          "max": 1
-        },
-        "argument2": {
-          "type": "minecraft:square",
-          "argument": {
+        "left": 0.12,
+        "right": {
+          "type": "minecraft:mul",
+          "left": {
             "type": "minecraft:clamp",
             "input": {
               "type": "minecraft:mul",
-              "argument1": 0.9523809523809523,
-              "argument2": {
+              "left": 0.9523809523809523,
+              "right": {
                 "type": "minecraft:add",
-                "argument1": {
+                "left": {
                   "type": "lithostitched:fast_noise",
-                  "config": "taleks-better-landscape:mountains",
+                  "config": "taleks-better-landscape:crags",
                   "xz_scale": 1.0,
                   "y_scale": 0.0
                 },
-                "argument2": 0.2
+                "right": 0.25
               }
             },
             "min": 0,
             "max": 1
+          },
+          "right": {
+            "type": "minecraft:square",
+            "input": {
+              "type": "minecraft:clamp",
+              "input": {
+                "type": "minecraft:mul",
+                "left": 0.9523809523809523,
+                "right": {
+                  "type": "minecraft:add",
+                  "left": {
+                    "type": "lithostitched:fast_noise",
+                    "config": "taleks-better-landscape:mountains",
+                    "xz_scale": 1.0,
+                    "y_scale": 0.0
+                  },
+                  "right": 0.2
+                }
+              },
+              "min": 0,
+              "max": 1
+            }
           }
         }
-      }
-    },
-    "shift_x": {
-      "type": "minecraft:mul",
-      "argument1": 60,
-      "argument2": {
-        "type": "lithostitched:fast_noise",
-        "config": "taleks-better-landscape:mountain_warp_x",
-        "xz_scale": 1.0,
-        "y_scale": 0.0
-      }
-    },
-    "shift_y": 0,
-    "shift_z": {
-      "type": "minecraft:mul",
-      "argument1": 60,
-      "argument2": {
-        "type": "lithostitched:fast_noise",
-        "config": "taleks-better-landscape:mountain_warp_z",
-        "xz_scale": 1.0,
-        "y_scale": 0.0
+      },
+      "shift_x": {
+        "type": "minecraft:mul",
+        "left": 60,
+        "right": {
+          "type": "lithostitched:fast_noise",
+          "config": "taleks-better-landscape:mountain_warp_x",
+          "xz_scale": 1.0,
+          "y_scale": 0.0
+        }
+      },
+      "shift_y": 0,
+      "shift_z": {
+        "type": "minecraft:mul",
+        "left": 60,
+        "right": {
+          "type": "lithostitched:fast_noise",
+          "config": "taleks-better-landscape:mountain_warp_z",
+          "xz_scale": 1.0,
+          "y_scale": 0.0
+        }
       }
     }
   }

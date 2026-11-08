@@ -1,9 +1,7 @@
 {
-  "type": "lithostitched:add_surface_rule",
-  "levels": [
-    "minecraft:overworld"
-  ],
-  "surface_rule": {
+  "type": "lithostitched:set_material_rule",
+  "target_rules": "minecraft:overworld",
+  "material_rule": {
     "type": "minecraft:sequence",
     "sequence": [
       {
@@ -37,9 +35,7 @@
                 },
                 "then_run": {
                   "type": "minecraft:block",
-                  "result_state": {
-                    "Name": "minecraft:stone"
-                  }
+                  "result_state": "minecraft:stone"
                 }
               },
               {
@@ -61,9 +57,7 @@
                   },
                   "then_run": {
                     "type": "minecraft:block",
-                    "result_state": {
-                      "Name": "minecraft:stone"
-                    }
+                    "result_state": "minecraft:stone"
                   }
                 }
               },
@@ -78,9 +72,7 @@
                 },
                 "then_run": {
                   "type": "minecraft:block",
-                  "result_state": {
-                    "Name": "minecraft:andesite"
-                  }
+                  "result_state": "minecraft:andesite"
                 }
               },
               {
@@ -102,9 +94,7 @@
                   },
                   "then_run": {
                     "type": "minecraft:block",
-                    "result_state": {
-                      "Name": "minecraft:andesite"
-                    }
+                    "result_state": "minecraft:andesite"
                   }
                 }
               },
@@ -119,9 +109,7 @@
                 },
                 "then_run": {
                   "type": "minecraft:block",
-                  "result_state": {
-                    "Name": "minecraft:gravel"
-                  }
+                  "result_state": "minecraft:gravel"
                 }
               }
             ]
@@ -178,9 +166,7 @@
                     },
                     "then_run": {
                       "type": "minecraft:block",
-                      "result_state": {
-                        "Name": "minecraft:gravel"
-                      }
+                      "result_state": "minecraft:gravel"
                     }
                   },
                   {
@@ -193,16 +179,12 @@
                     },
                     "then_run": {
                       "type": "minecraft:block",
-                      "result_state": {
-                        "Name": "minecraft:andesite"
-                      }
+                      "result_state": "minecraft:andesite"
                     }
                   },
                   {
                     "type": "minecraft:block",
-                    "result_state": {
-                      "Name": "minecraft:stone"
-                    }
+                    "result_state": "minecraft:stone"
                   }
                 ]
               }
@@ -250,9 +232,7 @@
                   },
                   "then_run": {
                     "type": "minecraft:block",
-                    "result_state": {
-                      "Name": "minecraft:stone"
-                    }
+                    "result_state": "minecraft:stone"
                   }
                 },
                 {
@@ -274,9 +254,7 @@
                     },
                     "then_run": {
                       "type": "minecraft:block",
-                      "result_state": {
-                        "Name": "minecraft:stone"
-                      }
+                      "result_state": "minecraft:stone"
                     }
                   }
                 },
@@ -291,9 +269,7 @@
                   },
                   "then_run": {
                     "type": "minecraft:block",
-                    "result_state": {
-                      "Name": "minecraft:andesite"
-                    }
+                    "result_state": "minecraft:andesite"
                   }
                 },
                 {
@@ -315,9 +291,7 @@
                     },
                     "then_run": {
                       "type": "minecraft:block",
-                      "result_state": {
-                        "Name": "minecraft:andesite"
-                      }
+                      "result_state": "minecraft:andesite"
                     }
                   }
                 },
@@ -332,9 +306,7 @@
                   },
                   "then_run": {
                     "type": "minecraft:block",
-                    "result_state": {
-                      "Name": "minecraft:gravel"
-                    }
+                    "result_state": "minecraft:gravel"
                   }
                 }
               ]
@@ -382,9 +354,7 @@
                   },
                   "then_run": {
                     "type": "minecraft:block",
-                    "result_state": {
-                      "Name": "minecraft:stone"
-                    }
+                    "result_state": "minecraft:stone"
                   }
                 },
                 {
@@ -406,9 +376,7 @@
                     },
                     "then_run": {
                       "type": "minecraft:block",
-                      "result_state": {
-                        "Name": "minecraft:stone"
-                      }
+                      "result_state": "minecraft:stone"
                     }
                   }
                 },
@@ -423,9 +391,7 @@
                   },
                   "then_run": {
                     "type": "minecraft:block",
-                    "result_state": {
-                      "Name": "minecraft:andesite"
-                    }
+                    "result_state": "minecraft:andesite"
                   }
                 },
                 {
@@ -447,9 +413,7 @@
                     },
                     "then_run": {
                       "type": "minecraft:block",
-                      "result_state": {
-                        "Name": "minecraft:andesite"
-                      }
+                      "result_state": "minecraft:andesite"
                     }
                   }
                 },
@@ -464,9 +428,7 @@
                   },
                   "then_run": {
                     "type": "minecraft:block",
-                    "result_state": {
-                      "Name": "minecraft:gravel"
-                    }
+                    "result_state": "minecraft:gravel"
                   }
                 }
               ]

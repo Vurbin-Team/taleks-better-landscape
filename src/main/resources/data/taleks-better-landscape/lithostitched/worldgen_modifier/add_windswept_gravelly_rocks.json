@@ -4,7 +4,6 @@
     "minecraft:windswept_gravelly_hills"
   ],
   "features": [
-    "taleks-better-landscape:windswept_boulder_dense",
     "taleks-better-landscape:windswept_stones_dense"
   ],
   "step": "local_modifications"

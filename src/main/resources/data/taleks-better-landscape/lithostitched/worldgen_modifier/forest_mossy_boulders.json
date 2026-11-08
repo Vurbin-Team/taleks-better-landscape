@@ -1,0 +1,15 @@
+{
+  "type": "lithostitched:add_features",
+  "biomes": [
+    "minecraft:forest",
+    "minecraft:birch_forest",
+    "minecraft:old_growth_birch_forest",
+    "minecraft:flower_forest",
+    "minecraft:taiga"
+  ],
+  "features": [
+    "taleks-better-landscape:mossy_boulder",
+    "taleks-better-landscape:cobble_boulder"
+  ],
+  "step": "top_layer_modification"
+}

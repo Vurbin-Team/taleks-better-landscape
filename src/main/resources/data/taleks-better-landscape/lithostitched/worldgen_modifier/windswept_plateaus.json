@@ -4,15 +4,15 @@
   "target_function": "minecraft:overworld/offset",
   "wrapper_function": {
     "type": "minecraft:add",
-    "argument1": {
+    "left": {
       "type": "lithostitched:wrapped_marker"
     },
-    "argument2": {
+    "right": {
       "type": "minecraft:mul",
-      "argument1": {
+      "left": {
         "type": "minecraft:blend_alpha"
       },
-      "argument2": "taleks-better-landscape:windswept_relief"
+      "right": "taleks-better-landscape:windswept_relief"
     }
   }
 }

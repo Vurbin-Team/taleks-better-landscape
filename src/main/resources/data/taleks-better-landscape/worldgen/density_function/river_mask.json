@@ -2,11 +2,14 @@
   "type": "minecraft:clamp",
   "input": {
     "type": "minecraft:add",
-    "argument1": 1.5,
-    "argument2": {
+    "left": 1.5,
+    "right": {
       "type": "minecraft:mul",
-      "argument1": -10,
-      "argument2": { "type": "minecraft:abs", "argument": "minecraft:overworld/ridges" }
+      "left": -10,
+      "right": {
+        "type": "minecraft:abs",
+        "input": "minecraft:overworld/ridges"
+      }
     }
   },
   "min": 0,
